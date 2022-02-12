@@ -1,6 +1,11 @@
+import './assets/styles/app.scss'
+import ImportPage from './pages/Import'
+
 function App() {
   return (
-    <div className="App"></div>
+    <div className="App">
+      <ImportPage />
+    </div>
   )
 }
 
