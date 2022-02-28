@@ -1,10 +1,10 @@
 import './assets/styles/app.scss'
-import ImportPage from './pages/Import'
+import LandingPage from './pages/Landing'
 
 function App() {
   return (
     <div className="App">
-      <ImportPage />
+      <LandingPage />
     </div>
   )
 }

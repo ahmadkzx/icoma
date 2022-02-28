@@ -1,6 +1,6 @@
 import DefaultLayout from '../../layouts/default'
 
-export default function ImportPage() {
+export default function LandingPage() {
   return (
     <DefaultLayout>
       <div className="container min-h-[95vh] mx-auto flex flex-col justify-center items-center">
