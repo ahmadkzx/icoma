@@ -1,3 +1,4 @@
+import 'flowbite'
 import './assets/styles/app.scss'
 import LandingPage from './pages/Landing'
 import { Routes, Route } from 'react-router-dom'
