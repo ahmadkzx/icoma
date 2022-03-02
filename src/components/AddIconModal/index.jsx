@@ -1,18 +1,20 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { AppContext } from '../../contexts/app'
 
 export default function AddIconModal() {
+  const [app, dispatch] = useContext(AppContext)
   const [iconName, setIconName] = useState('')
   const [iconSvg, setIconSvg] = useState()
 
   async function addIcon() {
     try {
       __validateFields()
-      
+
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/icons'
       const body = {
         name: iconName,
-        svg: iconSvg
+        svg: iconSvg[0]
       }
 
       axios.put(endpoint, body)
@@ -27,11 +29,18 @@ export default function AddIconModal() {
       if (iconName.trim().length == 0) throw new Error('Icon name is necessary')
       if (/\s/g.test(iconName)) throw new Error('Icon name should not contain white space')
 
-      if (!iconSvg) throw new Error('Icon svg file is necessary')
-      if (iconSvg.type !== 'image/svg+xml') throw new Error('Icon file type should be svg')
+      if (!iconSvg[0]) throw new Error('Icon svg file is necessary')
+      if (iconSvg[0].type !== 'image/svg+xml') throw new Error('Icon file type should be svg')
 
     } catch(err) {
-      console.error(err)
+      dispatch({
+        type: 'SHOW_TOAST',
+        payload: {
+          type: 'ERROR',
+          text: err.message,
+          stamp: new Date().getTime()
+        }
+      })
     }
   }
 
@@ -50,7 +59,7 @@ export default function AddIconModal() {
             <button
               type="button"
               className="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
-              data-modal-toggle="create-pack-modal"
+              data-modal-toggle="add-icon-modal"
             >
               <svg
                 className="w-5 h-5"
