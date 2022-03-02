@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Spinner from '../../components/Spinner'
-import IconCard from '../../components/IconCard'
+import IconList from '../../components/IconList'
 import DefaultLayout from '../../layouts/default'
+
 
 export default function AppPage() {
   const [icons, setIcons] = useState([])
@@ -28,9 +29,7 @@ export default function AppPage() {
         {
           isLoading
             ? <div className="flex items-center justify-center min-h-[90vh]"><Spinner /></div>
-            : <div className="grid grid-cols-18 gap-2">
-                {icons.map((icon, index) => <IconCard icon={icon} key={'icon-' + index} />)}
-              </div>
+            : <IconList icons={icons} />
         }
       </div>
     </DefaultLayout>
