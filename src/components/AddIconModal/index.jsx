@@ -10,11 +10,12 @@ export default function AddIconModal() {
   async function addIcon() {
     try {
       __validateFields()
+      const svgText = await iconSvg[0].text()
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/icons'
       const body = {
         name: iconName,
-        svg: iconSvg[0]
+        svg: svgText
       }
 
       axios.put(endpoint, body)
@@ -41,6 +42,8 @@ export default function AddIconModal() {
           stamp: new Date().getTime()
         }
       })
+
+      throw err
     }
   }
 
