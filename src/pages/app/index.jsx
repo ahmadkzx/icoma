@@ -1,15 +1,17 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
 import Spinner from '../../components/Spinner'
+import { AppContext } from '../../contexts/app'
 import IconList from '../../components/IconList'
 import DefaultLayout from '../../layouts/default'
+import { useContext, useEffect, useState } from 'react'
 
 
 export default function AppPage() {
+  const [app] = useContext(AppContext)
   const [icons, setIcons] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => getIcons(), [])
+  useEffect(() => getIcons(), [app?.iconsStamp])
 
   async function getIcons() {
     try {

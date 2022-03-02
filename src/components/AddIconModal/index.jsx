@@ -21,6 +21,7 @@ export default function AddIconModal() {
       }
 
       axios.put(endpoint, body)
+      dispatch({ type: 'REFRESH_ICONS' })
       hideModal()
 
     } catch(err) {

@@ -6,6 +6,8 @@ const AppReducer = (state, action) => {
       return Object.assign({}, state, { toast: action.payload })
     case 'HIDE_TOAST':
       return Object.assign({}, state, { toast: null })
+    case 'REFRESH_ICONS':
+      return Object.assign({}, state, { iconsStamp: new Date().getTime() })
   }
 }
 
