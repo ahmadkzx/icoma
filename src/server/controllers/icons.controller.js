@@ -3,17 +3,18 @@ import fs from 'fs/promises'
 
 export async function addIcon(req, res) {
   try {
-    console.log(req.body)
-    // const dist = path.join(__dirname, '../../../mock/icons')
-    // const filePath = path.join(dist, '/', req.body.name)
-    // const fileContent = JSON.stringify({
-    //   name: req.body.name,
-    //   svg: req.body.svg
-    // })
+    const iconsPath = path.join(__dirname, '../../../mock/icons.json')
+    const iconsJson = await fs.readFile(iconsPath, { encoding: 'utf-8' })
+    const icons = JSON.parse(iconsJson)
 
-    // await fs.writeFile(filePath, fileContent, 'utf-8')
+    icons.push({
+      name: req.body.name,
+      svg: req.body.svg
+    })
 
-    res.status(204)
+    await fs.writeFile(iconsPath, JSON.stringify(icons), { encoding: 'utf-8' })
+
+    res.sendStatus(204)
 
   } catch(err) {
     console.error('[SERVER ERROR]: ', err)
@@ -23,14 +24,15 @@ export async function addIcon(req, res) {
 
 export async function getIcons(req, res) {
   try {
-    const src = path.join(__dirname, '../../../mock/icons.json')
-    const icons = await fs.readFile(src, { encoding: 'utf-8' })
+    const iconsPath = path.join(__dirname, '../../../mock/icons.json')
+    const iconsJson = await fs.readFile(iconsPath, { encoding: 'utf-8' })
+    const icons = JSON.parse(iconsJson)
 
-    res.status(200).json({ data: JSON.parse(icons) })
+    res.status(200).json({ data: icons })
 
   } catch(err) {
     console.error('[SERVER ERROR]: ', err)
-    res.status(500)
+    res.sendStatus(500)
   }
 }
 

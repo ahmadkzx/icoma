@@ -1,4 +1,5 @@
 import axios from 'axios'
+import useModal from '../../hooks/modal'
 import { useState, useContext } from 'react'
 import { AppContext } from '../../contexts/app'
 
@@ -6,6 +7,7 @@ export default function AddIconModal() {
   const [app, dispatch] = useContext(AppContext)
   const [iconName, setIconName] = useState('')
   const [iconSvg, setIconSvg] = useState()
+  const [showModal, hideModal] = useModal('add-icon-modal')
 
   async function addIcon() {
     try {
@@ -19,9 +21,18 @@ export default function AddIconModal() {
       }
 
       axios.put(endpoint, body)
+      hideModal()
 
     } catch(err) {
       console.error(err)
+      dispatch({
+        type: 'SHOW_TOAST',
+        payload: {
+          type: 'ERROR',
+          text: 'Failed !',
+          stamp: new Date().getTime()
+        }
+      })
     }
   }
 
@@ -62,7 +73,7 @@ export default function AddIconModal() {
             <button
               type="button"
               className="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
-              data-modal-toggle="add-icon-modal"
+              onClick={hideModal}
             >
               <svg
                 className="w-5 h-5"
