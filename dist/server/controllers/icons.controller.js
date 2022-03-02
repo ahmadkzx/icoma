@@ -28,7 +28,7 @@ async function getIcons(req, res) {
       });
       const fileName = name.replace('.svg', '');
       return {
-        fileName,
+        name: fileName,
         content: file
       };
     }));
