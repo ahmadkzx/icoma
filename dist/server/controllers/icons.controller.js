@@ -26,11 +26,7 @@ async function getIcons(req, res) {
       const file = await _promises.default.readFile(filePath, {
         encoding: 'utf-8'
       });
-      const fileName = name.replace('.svg', '');
-      return {
-        name: fileName,
-        content: file
-      };
+      return JSON.parse(file);
     }));
     res.status(200).json({
       data: files

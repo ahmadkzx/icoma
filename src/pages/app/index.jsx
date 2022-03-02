@@ -12,7 +12,6 @@ export default function AppPage() {
 
   async function getIcons() {
     try {
-      console.log('jjj')
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/icons'
       const { data: result } = await axios.get(endpoint)
       setIcons(result.data)
