@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Spinner from '../Spinner'
 import useModal from '../../hooks/modal'
 import { useState, useContext } from 'react'
 import { AppContext } from '../../contexts/app'
@@ -7,10 +8,14 @@ export default function AddIconModal() {
   const [app, dispatch] = useContext(AppContext)
   const [iconName, setIconName] = useState('')
   const [iconSvg, setIconSvg] = useState()
+  const [isLoading, setIsLoading] = useState(false)
   const [showModal, hideModal] = useModal('add-icon-modal')
 
   async function addIcon() {
     try {
+      if (isLoading) return
+      setIsLoading(true)
+      
       __validateFields()
       const svgText = await iconSvg[0].text()
 
@@ -21,6 +26,8 @@ export default function AddIconModal() {
       }
 
       axios.put(endpoint, body)
+      
+      await new Promise(r => setTimeout(r, 1000))
       dispatch({ type: 'REFRESH_ICONS' })
       hideModal()
 
@@ -34,6 +41,9 @@ export default function AddIconModal() {
           stamp: new Date().getTime()
         }
       })
+
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -117,14 +127,16 @@ export default function AddIconModal() {
           <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-600">
             <button
               type="button"
-              className="text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+              className="flex items-center justify-center text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
               onClick={addIcon}
             >
-              Add
+              {isLoading && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+              <span>{isLoading ? 'Loading...' : 'Add'}</span>
             </button>
             <button
               data-modal-toggle="add-icon-modal"
               type="button"
+              disabled={isLoading}
               className="border focus:ring-4 focus:ring-gray-300 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600"
             >
               Cancel

@@ -30,7 +30,7 @@ export default function AppPage() {
       <div className="container mx-auto mt-3">
         {
           isLoading
-            ? <div className="flex items-center justify-center min-h-[90vh]"><Spinner /></div>
+            ? <div className="flex items-center justify-center min-h-[90vh]"><Spinner size="8" border="gray-600" fill="blue-600" /></div>
             : <IconList icons={icons} />
         }
       </div>
