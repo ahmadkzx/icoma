@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs/promises'
+import { v4 as uuid } from 'uuid'
 import exist from '../utils/exist'
 
 export async function addIcon(req, res) {
@@ -12,6 +13,7 @@ export async function addIcon(req, res) {
     const icons = JSON.parse(iconsJson)
 
     icons.push({
+      id: uuid(),
       name: req.body.name,
       svg: req.body.svg
     })
