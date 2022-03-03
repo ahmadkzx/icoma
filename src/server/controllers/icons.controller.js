@@ -1,9 +1,13 @@
 import path from 'path'
 import fs from 'fs/promises'
+import exist from '../utils/exist'
 
 export async function addIcon(req, res) {
   try {
     const iconsPath = path.join(__dirname, '../../../mock/icons.json')
+
+    await exist(iconsPath, /*createIfNotExist*/ true, /*content*/ '[]')
+
     const iconsJson = await fs.readFile(iconsPath, { encoding: 'utf-8' })
     const icons = JSON.parse(iconsJson)
 
@@ -25,6 +29,9 @@ export async function addIcon(req, res) {
 export async function getIcons(req, res) {
   try {
     const iconsPath = path.join(__dirname, '../../../mock/icons.json')
+
+    await exist(iconsPath, /*createIfNotExist*/ true, /*content*/ '[]')
+
     const iconsJson = await fs.readFile(iconsPath, { encoding: 'utf-8' })
     const icons = JSON.parse(iconsJson)
 
