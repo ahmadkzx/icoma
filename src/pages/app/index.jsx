@@ -15,13 +15,18 @@ export default function AppPage() {
 
   async function getIcons() {
     try {
+      if (isLoading) return
+      setIsLoading(true)
+
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/icons'
       const { data: result } = await axios.get(endpoint)
       setIcons(result.data)
-      setIsLoading(false)
 
     } catch(err) {
       console.error(err)
+      
+    } finally {
+      setIsLoading(false)
     }
   }
 
