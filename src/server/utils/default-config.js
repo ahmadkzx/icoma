@@ -1,5 +1,6 @@
 export default {
   name: 'Icom',
   icons: [],
-  props: []
+  props: [],
+  target: 'vue'
 }
