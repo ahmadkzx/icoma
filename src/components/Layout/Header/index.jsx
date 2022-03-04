@@ -1,11 +1,13 @@
 import { useContext } from 'react'
 import useModal from '../../../hooks/modal'
 import AddIconModal from '../../AddIconModal'
+import SettingsModal from '../../SettingsModal'
 import { AppContext } from '../../../contexts/app'
 
 export default function Header() {
   const [app, dispatch] = useContext(AppContext)
   const [showAddIconModal] = useModal('add-icon-modal')
+  const [showSettingsModal] = useModal('settings-modal')
 
   return (
     <div>
@@ -19,6 +21,7 @@ export default function Header() {
             <div className="inline-flex rounded-md shadow-sm" role="group">
               <button
                 className="py-2 px-4 text-sm font-medium rounded-l-lg border focus:z-10 focus:ring-2 bg-gray-700 border-gray-600 text-white hover:text-white hover:bg-gray-600 focus:ring-blue-500 focus:text-white"
+                onClick={showSettingsModal}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               </button>
@@ -47,6 +50,7 @@ export default function Header() {
       <div className="h-16"></div>
 
       <AddIconModal />
+      <SettingsModal />
     </div>
   )
 }

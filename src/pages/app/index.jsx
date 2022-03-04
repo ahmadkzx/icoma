@@ -15,7 +15,6 @@ export default function AppPage() {
 
   async function getIcons() {
     try {
-      if (isLoading) return
       setIsLoading(true)
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/icons'
