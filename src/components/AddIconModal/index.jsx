@@ -19,7 +19,7 @@ export default function AddIconModal() {
       __validateFields()
       const svgText = await iconSvg[0].text()
 
-      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/icons'
+      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon'
       const body = {
         name: iconName,
         svg: svgText
@@ -28,7 +28,7 @@ export default function AddIconModal() {
       axios.put(endpoint, body)
       
       await new Promise(r => setTimeout(r, 1000))
-      dispatch({ type: 'REFRESH_ICONS' })
+      dispatch({ type: 'REFRESH' })
       hideModal()
 
     } catch(err) {
