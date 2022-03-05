@@ -15,6 +15,10 @@ export default function SettingsModal() {
     setProps([...props, { id: props.length + 1, name: '', default: '' }])
   }
 
+  function removeProp(targetPropId) {
+    setProps(props.filter(prop => prop.id != targetPropId))
+  }
+
   function updateProp(targetProp) {
     setProps(props.map(prop => {
       if (prop.id == targetProp.id) prop = targetProp
@@ -129,6 +133,7 @@ export default function SettingsModal() {
               <button
                 type="button"
                 className="col-span-1 flex items-center justify-center text-white focus:ring-40 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-900"
+                onClick={() => removeProp(prop.id)}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
               </button>
