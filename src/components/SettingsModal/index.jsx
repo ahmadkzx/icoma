@@ -33,7 +33,7 @@ export default function SettingsModal() {
       setIsLoading(true)
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api'
-      const body = { target, props }
+      const body = { name, target, props }
 
       await axios.patch(endpoint, body)
       dispatch({ type: 'REFRESH' })
