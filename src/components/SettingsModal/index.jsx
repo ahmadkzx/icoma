@@ -6,6 +6,7 @@ import { AppContext } from '../../contexts/app'
 
 export default function SettingsModal() {
   const [app, dispatch] = useContext(AppContext)
+  const [name, setName] = useState(app.name)
   const [props, setProps] = useState(app.props)
   const [target, setTarget] = useState(app.target)
   const [isLoading, setIsLoading] = useState(false)
@@ -81,6 +82,18 @@ export default function SettingsModal() {
 
         <div className="p-6">
           <div>
+            <label htmlFor="pack-name" className="block mb-2 text-sm font-medium text-gray-900 text-gray-300">Name</label>
+            <input
+              type="text"
+              value={name}
+              id="pack-name"
+              placeholder="AwesomePack"
+              className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+              onChange={e => setName(e.target.value)}
+            />
+          </div>
+
+          <div className="mt-3">
             <span className="block mb-2 text-sm font-medium text-gray-900 text-gray-300">Target</span>
 
             <div className="flex items-center mb-2">
