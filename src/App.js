@@ -11,15 +11,17 @@ function App() {
 
   return (
     <div className="App">
-      <DefaultLayout>
-        <div className="container mx-auto mt-3">
-          {
-            app?.isLoading ?? true
-              ? <div className="flex items-center justify-center min-h-[90vh]"><Spinner size="8" border="gray-600" fill="blue-600" /></div>
-              : <IconList icons={app.icons || []} />
-          }
-        </div>
-      </DefaultLayout>
+      {
+        app?.isLoading ?? true
+          ? <div className="flex items-center justify-center min-h-screen bg-slate-900"><Spinner size="8" border="gray-600" fill="blue-600" /></div>
+          : <>
+              <DefaultLayout>
+                <div className="container mx-auto mt-3">
+                  <IconList icons={app.icons || []} />
+                </div>
+              </DefaultLayout>
+            </>
+      }
     </div>
   )
 }
