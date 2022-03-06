@@ -13,6 +13,8 @@ const AppReducer = (state = {}, action) => {
       return Object.assign({}, state, { stamp: new Date().getTime() })
     case 'SET_LOADING':
       return Object.assign({}, state, { isLoading: action.payload })
+    case 'OPEN_ICON_MODAL':
+      return Object.assign({}, state, { iconModal: action.payload })
     default:
       return state
   }

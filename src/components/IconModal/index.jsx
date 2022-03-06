@@ -1,24 +1,62 @@
-import './index.css'
 import axios from 'axios'
 import Spinner from '../Spinner'
 import useModal from '../../hooks/modal'
-import { useState, useContext, useEffect } from 'react'
 import { AppContext } from '../../contexts/app'
 import ReactHtmlParser from 'react-html-parser'
+import { useState, useContext, useEffect } from 'react'
 
 export default function IconModal() {
+  const [name, setName] = useState('')
   const [app, dispatch] = useContext(AppContext)
   const [isLoading, setIsLoading] = useState(false)
   const [showModal, hideModal] = useModal('icon-modal')
+  const iconPath = app.iconModal?.svg.replace(/<svg\b((?:[^>"']|"[^"]*"|'[^']*')*)>/g, '<g>').replace(/<\/svg>/g, '</g>')
 
-  
-  const icon = {
-    "id": "9f343469-8e3d-4f1d-8c2a-b6843fd10e5d",
-    "name": "Chats",
-    "svg": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M13.2 7.6L14.6 9L13.2 10.4C12.8 10.8 12.8 11.4 13.2 11.8C13.4 12 13.6 12.1 13.9 12.1C14.2 12.1 14.4 12 14.6 11.8L16 10.4L17.4 11.8C17.6 12 17.8 12.1 18.1 12.1C18.4 12.1 18.6 12 18.8 11.8C19.2 11.4 19.2 10.8 18.8 10.4L17.4 9L18.8 7.6C19.2 7.2 19.2 6.6 18.8 6.2C18.4 5.8 17.8 5.8 17.4 6.2L16 7.6L14.6 6.2C14.2 5.8 13.6 5.8 13.2 6.2C12.8 6.6 12.8 7.2 13.2 7.6Z\" fill=\"#4C4C4C\"/>\n<path d=\"M20 12C19.4 12 19 12.4 19 13V15C19 15.6 18.6 16 18 16H7.7L5 17.6V7C5 6.4 5.4 6 6 6H12C12.6 6 13 5.6 13 5C13 4.4 12.6 4 12 4H6C4.3 4 3 5.3 3 7V21L8.3 18H18C19.7 18 21 16.7 21 15V13C21 12.4 20.6 12 20 12Z\" fill=\"#4C4C4C\"/>\n</svg>\n"
+  useEffect(() => {
+    if (app.iconModal?.id) {
+      setName(app.iconModal.name)
+      showModal()
+    }
+  }, [app.iconModal])
+
+  async function save() {
+    try {
+      if (isLoading) return
+      setIsLoading(true)
+
+      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon'
+      const body = { name, id: app.iconModal?.id }
+
+      axios.patch(endpoint, body)
+      
+      await new Promise(r => setTimeout(r, 1000))
+      dispatch({ type: 'REFRESH' })
+      dispatch({ type: 'OPEN_ICON_MODAL' })
+      hideModal()
+
+    } catch(err) {
+      console.error(err)
+    }
   }
-  // const iconSvg = icon.svg.replace(/width=("|')\d*\w*("|')/g, '').replace(/height=("|')\d*\w*("|')/g, '')
-  const iconSvg = icon.svg.replace('<svg ', '<svg class="h-12 w-12" ')
+
+  async function deleteIcon() {
+    try {
+      if (isLoading) return
+      setIsLoading(true)
+
+      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon?id=' + app.iconModal?.id
+
+      axios.delete(endpoint)
+      
+      await new Promise(r => setTimeout(r, 1000))
+      dispatch({ type: 'REFRESH' })
+      dispatch({ type: 'OPEN_ICON_MODAL' })
+      hideModal()
+
+    } catch(err) {
+      console.error(err)
+    }
+  }
 
   return (
     <div
@@ -28,10 +66,18 @@ export default function IconModal() {
     >
       <div className="relative px-4 w-full max-w-2xl h-full md:h-auto">
         <div className="relative rounded-lg shadow bg-gray-700">
-          <div className="flex justify-between items-start p-5 rounded-t border-b border-gray-500">
-            <h3 className="text-xl font-semibold lg:text-2xl text-white">
-              {icon.name}
-            </h3>
+          <div className="flex justify-between items-center p-5 rounded-t border-b border-gray-500">
+            <div>
+              <input
+                type="text"
+                id="icon-name"
+                value={name}
+                placeholder="AwesomeIcon"
+                className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                onChange={e => setName(e.target.value)}
+              />
+            </div>
+
             <button
               type="button"
               className="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
@@ -53,29 +99,45 @@ export default function IconModal() {
           </div>
 
           <div className="p-6">
-            <div className="flex items-center justify-center icon-preview-container">
-              {ReactHtmlParser(iconSvg)}
+            <div className="py-3 flex items-center justify-center icon-preview-container bg-gray-800 rounded">
+              <svg className="h-32 w-32" viewBox="0 0 24 24">
+                {ReactHtmlParser(iconPath)}
+              </svg>
             </div>
           </div>
           
-          {/* <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-600">
-            <button
-              type="button"
-              className="flex items-center justify-center text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
-              onClick={addIcon}
-            >
-              {isLoading && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
-              <span>{isLoading ? 'Loading...' : 'Add'}</span>
-            </button>
-            <button
-              data-modal-toggle="icon-modal"
-              type="button"
-              disabled={isLoading}
-              className="border focus:ring-4 focus:ring-gray-300 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600"
-            >
-              Cancel
-            </button>
-          </div> */}
+          <div className="flex items-center justify-between p-6 space-x-2 rounded-b border-t border-gray-600">
+            <div className="flex items-center">
+              <button
+                type="button"
+                disabled={isLoading}
+                className="mr-2 flex items-center justify-center text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+                onClick={save}
+              >
+                {isLoading && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+                <span>{isLoading ? 'Loading...' : 'Save'}</span>
+              </button>
+              <button
+                data-modal-toggle="icon-modal"
+                type="button"
+                disabled={isLoading}
+                className="border focus:ring-4 focus:ring-gray-300 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600"
+              >
+                Cancel
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                disabled={isLoading}
+                className="flex items-center justify-center text-white focus:ring-40 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-900"
+                onClick={deleteIcon}
+              >
+                {isLoading && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+                <span>{isLoading ? 'Loading...' : 'Delete'}</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
