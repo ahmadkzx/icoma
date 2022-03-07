@@ -51,6 +51,7 @@ export async function updateIcon(req, res) {
     if (targetIconIndex == -1) return res.sendStatus(404)
 
     config.icons[targetIconIndex].name = req.body.name
+    config.icons[targetIconIndex].props = req.body.props
 
     await fs.writeFile(configPath, JSON.stringify(config), { encoding: 'utf-8' })
 
