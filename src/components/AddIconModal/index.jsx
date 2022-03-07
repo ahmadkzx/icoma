@@ -17,7 +17,7 @@ export default function AddIconModal() {
       setIsLoading(true)
       
       __validateFields()
-      const svgText = await iconSvg[0].text()
+      const svgText = await __extractSvg()
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon'
       const body = {
@@ -67,6 +67,14 @@ export default function AddIconModal() {
 
       throw err
     }
+  }
+
+  async function __extractSvg() {
+    let svg = await iconSvg[0].text()
+    // remove <svg></svg> and convert /> to </path>
+    svg = svg.replace(/<svg\b((?:[^>"']|"[^"]*"|'[^']*')*)>/g, '<g>').replace(/<\/svg>/g, '</g>').replace(/\/>/g, '></path>')
+
+    return svg
   }
 
   return (

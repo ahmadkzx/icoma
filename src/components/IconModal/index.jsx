@@ -14,7 +14,6 @@ export default function IconModal() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [addProp, deleteProp, updateProp] = useProps()
   const [showModal, hideModal] = useModal('icon-modal')
-  const iconPath = app.iconModal?.svg.replace(/<svg\b((?:[^>"']|"[^"]*"|'[^']*')*)>/g, '<g>').replace(/<\/svg>/g, '</g>').replace(/\/>/g, '></path>')
 
   useEffect(() => {
     if (app.iconModal?.id) {
@@ -115,7 +114,7 @@ export default function IconModal() {
           <div className="p-6">
             <div className="py-3 flex items-center justify-center icon-preview-container bg-gray-800 rounded">
               <svg className="h-32 w-32" viewBox="0 0 24 24">
-                {ReactHtmlParser(iconPath)}
+                {ReactHtmlParser(app.iconModal?.svg)}
               </svg>
             </div>
 
