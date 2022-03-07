@@ -8,9 +8,10 @@ import { useState, useContext, useEffect } from 'react'
 export default function IconModal() {
   const [name, setName] = useState('')
   const [app, dispatch] = useContext(AppContext)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
   const [showModal, hideModal] = useModal('icon-modal')
-  const iconPath = app.iconModal?.svg.replace(/<svg\b((?:[^>"']|"[^"]*"|'[^']*')*)>/g, '<g>').replace(/<\/svg>/g, '</g>')
+  const iconPath = app.iconModal?.svg.replace(/<svg\b((?:[^>"']|"[^"]*"|'[^']*')*)>/g, '<g>').replace(/<\/svg>/g, '</g>').replace(/\/>/g, '></path>')
 
   useEffect(() => {
     if (app.iconModal?.id) {
@@ -19,10 +20,15 @@ export default function IconModal() {
     }
   }, [app.iconModal])
 
+  function close() {
+    dispatch({ type: 'OPEN_ICON_MODAL' })
+    hideModal()
+  }
+
   async function save() {
     try {
-      if (isLoading) return
-      setIsLoading(true)
+      if (isSaving) return
+      setIsSaving(true)
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon'
       const body = { name, id: app.iconModal?.id }
@@ -30,31 +36,35 @@ export default function IconModal() {
       axios.patch(endpoint, body)
       
       await new Promise(r => setTimeout(r, 1000))
+      setIsSaving(false)
       dispatch({ type: 'REFRESH' })
       dispatch({ type: 'OPEN_ICON_MODAL' })
       hideModal()
 
     } catch(err) {
       console.error(err)
+      setIsSaving(false)
     }
   }
 
   async function deleteIcon() {
     try {
-      if (isLoading) return
-      setIsLoading(true)
+      if (isDeleting) return
+      setIsDeleting(true)
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon?id=' + app.iconModal?.id
 
       axios.delete(endpoint)
       
       await new Promise(r => setTimeout(r, 1000))
+      setIsDeleting(false)
       dispatch({ type: 'REFRESH' })
       dispatch({ type: 'OPEN_ICON_MODAL' })
       hideModal()
 
     } catch(err) {
       console.error(err)
+      setIsDeleting(false)
     }
   }
 
@@ -110,18 +120,19 @@ export default function IconModal() {
             <div className="flex items-center">
               <button
                 type="button"
-                disabled={isLoading}
+                disabled={isSaving || isDeleting}
                 className="mr-2 flex items-center justify-center text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                 onClick={save}
               >
-                {isLoading && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
-                <span>{isLoading ? 'Loading...' : 'Save'}</span>
+                {isSaving && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+                <span>{isSaving ? 'Loading...' : 'Save'}</span>
               </button>
               <button
                 data-modal-toggle="icon-modal"
                 type="button"
-                disabled={isLoading}
+                disabled={isSaving || isDeleting}
                 className="border focus:ring-4 focus:ring-gray-300 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600"
+                onClick={close}
               >
                 Cancel
               </button>
@@ -129,12 +140,12 @@ export default function IconModal() {
             <div>
               <button
                 type="button"
-                disabled={isLoading}
+                disabled={isSaving || isDeleting}
                 className="flex items-center justify-center text-white focus:ring-40 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-900"
                 onClick={deleteIcon}
               >
-                {isLoading && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
-                <span>{isLoading ? 'Loading...' : 'Delete'}</span>
+                {isDeleting && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+                <span>{isDeleting ? 'Loading...' : 'Delete'}</span>
               </button>
             </div>
           </div>

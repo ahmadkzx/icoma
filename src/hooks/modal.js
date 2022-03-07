@@ -28,8 +28,8 @@ export default function useModal(id) {
 
   function hide() {
     __getElements()
-    modalEl.classList.add('hidden')
-    modalBackdropEl.classList.add('hidden')
+    if (modalEl) modalEl.classList.add('hidden')
+    if (modalBackdropEl) modalBackdropEl.classList.add('hidden')
   }
 
   return [show, hide]
