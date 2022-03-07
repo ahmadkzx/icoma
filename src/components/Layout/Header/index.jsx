@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useContext } from 'react'
 import useModal from '../../../hooks/modal'
 import AddIconModal from '../../AddIconModal'
@@ -8,6 +9,8 @@ export default function Header() {
   const [app, dispatch] = useContext(AppContext)
   const [showAddIconModal] = useModal('add-icon-modal')
   const [showSettingsModal] = useModal('settings-modal')
+
+  axios.post(process.env.REACT_APP_SERVER_ORIGIN + '/api/generator')
 
   return (
     <div>

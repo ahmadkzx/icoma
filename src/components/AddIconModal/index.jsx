@@ -22,7 +22,8 @@ export default function AddIconModal() {
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon'
       const body = {
         name: iconName,
-        svg: svgText
+        svg: svgText,
+        props: []
       }
 
       axios.put(endpoint, body)

@@ -11,7 +11,8 @@ export async function addIcon(req, res) {
     config.icons.push({
       id: uuid(),
       name: req.body.name,
-      svg: req.body.svg
+      svg: req.body.svg,
+      props: []
     })
 
     await fs.writeFile(configPath, JSON.stringify(config), { encoding: 'utf-8' })
