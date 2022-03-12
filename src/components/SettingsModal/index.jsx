@@ -12,6 +12,7 @@ export default function SettingsModal() {
   const [target, setTarget] = useState(app.target)
   const [isLoading, setIsLoading] = useState(false)
   const [addProp, deleteProp, updateProp] = useProps()
+  const [template, setTemplate] = useState(app.template)
   const [showModal, hideModal] = useModal('settings-modal')
 
   async function save() {
@@ -20,7 +21,7 @@ export default function SettingsModal() {
       setIsLoading(true)
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api'
-      const body = { name, target, props }
+      const body = { name, target, props, template }
 
       await axios.patch(endpoint, body)
       dispatch({ type: 'REFRESH' })
@@ -147,6 +148,16 @@ export default function SettingsModal() {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
             </button>
           </div>
+
+          <div className="mt-1">
+            <span className="block mb-2 text-sm font-medium text-gray-900 text-gray-300" htmlFor="template">Template</span>
+            <textarea
+              id="template"
+              value={template}
+              class="block p-2.5 w-full text-sm rounded-lg border focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+              onChange={e => setTemplate(e.target.value)}
+            ></textarea>
+          </div>
         </div>
         
         <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-600">
@@ -163,6 +174,7 @@ export default function SettingsModal() {
             type="button"
             disabled={isLoading}
             className="border focus:ring-4 focus:ring-gray-300 rounded-lg text-sm font-medium px-5 py-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600"
+            onClick={hideModal}
           >
             Cancel
           </button>

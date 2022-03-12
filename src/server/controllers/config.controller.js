@@ -22,6 +22,7 @@ export async function setConfig(req, res) {
     if (req.body.name) config.name = req.body.name
     if (req.body.props) config.props = req.body.props
     if (req.body.target) config.target = req.body.target
+    if (req.body.template) config.template = req.body.template
 
     fs.writeFile(configPath, JSON.stringify(config), 'utf-8')
     res.sendStatus(200)
