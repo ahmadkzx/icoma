@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs/promises'
 import readConfig from '../utils/read-config'
-import { vueTemplate } from '../utils/templates'
+import applyRegexps from '../utils/apply-regexps'
 
 export async function generate(req, res) {
   try {
@@ -9,7 +9,8 @@ export async function generate(req, res) {
     const dist = path.join(__dirname, '../../../mock/icon')
 
     await Promise.all(config.icons.map(async icon => {
-      const componentContent = vueTemplate(config, icon)
+      const componentSvg = applyRegexps(config, icon)
+      const componentContent = config.template.replace('<ICON>', componentSvg)
       const componentFiletype = (config.target == 'vue') ? 'vue' : 'jsx'
       const componentPath = path.join(dist, `/${icon.name}.${componentFiletype}`)
       await fs.writeFile(componentPath, componentContent, 'utf-8')

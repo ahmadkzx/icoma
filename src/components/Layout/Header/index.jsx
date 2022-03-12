@@ -10,6 +10,10 @@ export default function Header() {
   const [showAddIconModal] = useModal('add-icon-modal')
   const [showSettingsModal] = useModal('settings-modal')
 
+  async function generateIcons() {
+    axios.post(process.env.REACT_APP_SERVER_ORIGIN + '/api/generator')
+  }
+
   return (
     <div>
       <div className="fixed top-0 w-screen">
@@ -40,6 +44,7 @@ export default function Header() {
               </button>
               <button
                 className="py-2 px-4 text-sm font-medium rounded-r-lg focus:z-10 focus:ring-2 bg-blue-700 text-white hover:text-white hover:bg-blue-800 focus:ring-blue-500 focus:text-white"
+                onClick={generateIcons}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
               </button>
