@@ -1,9 +1,9 @@
 export default {
   name: 'Icom',
   icons: [],
-  props: [{
-    name: 'size',
-    default: '24'
+  regexps: [{
+    expression: '\fill=".*"\g',
+    value: 'fill="white"'
   }],
   target: 'vue',
   template: `<template>

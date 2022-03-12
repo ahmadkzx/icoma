@@ -20,8 +20,8 @@ export async function setConfig(req, res) {
     const configPath = path.join(__dirname, '../../../mock/config.json')
 
     if (req.body.name) config.name = req.body.name
-    if (req.body.props) config.props = req.body.props
     if (req.body.target) config.target = req.body.target
+    if (req.body.regexps) config.regexps = req.body.regexps
     if (req.body.template) config.template = req.body.template
 
     fs.writeFile(configPath, JSON.stringify(config), 'utf-8')

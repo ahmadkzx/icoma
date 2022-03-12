@@ -23,7 +23,6 @@ export default function AddIconModal() {
       const body = {
         name: iconName,
         svg: svgText,
-        props: []
       }
 
       axios.put(endpoint, body)

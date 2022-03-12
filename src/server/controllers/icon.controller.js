@@ -12,7 +12,7 @@ export async function addIcon(req, res) {
       id: uuid(),
       name: req.body.name,
       svg: req.body.svg,
-      props: []
+      regexps: []
     })
 
     await fs.writeFile(configPath, JSON.stringify(config), { encoding: 'utf-8' })
@@ -52,7 +52,7 @@ export async function updateIcon(req, res) {
     if (targetIconIndex == -1) return res.sendStatus(404)
 
     config.icons[targetIconIndex].name = req.body.name
-    config.icons[targetIconIndex].props = req.body.props
+    config.icons[targetIconIndex].regexps = req.body.regexps
 
     await fs.writeFile(configPath, JSON.stringify(config), { encoding: 'utf-8' })
 

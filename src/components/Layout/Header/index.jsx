@@ -10,8 +10,6 @@ export default function Header() {
   const [showAddIconModal] = useModal('add-icon-modal')
   const [showSettingsModal] = useModal('settings-modal')
 
-  axios.post(process.env.REACT_APP_SERVER_ORIGIN + '/api/generator')
-
   return (
     <div>
       <div className="fixed top-0 w-screen">
