@@ -14,6 +14,7 @@ export default function SettingsModal() {
   const [template, setTemplate] = useState(app.template)
   const [showModal, hideModal] = useModal('settings-modal')
   const [addRegexp, deleteRegexp, updateRegexp] = useRegexps()
+  const [isFillWhite, setIsFillWhite] = useState(app.isFillWhite)
 
   async function save() {
     try {
@@ -21,7 +22,7 @@ export default function SettingsModal() {
       setIsLoading(true)
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api'
-      const body = { name, target, regexps, template }
+      const body = { name, target, regexps, template, isFillWhite }
 
       await axios.patch(endpoint, body)
       dispatch({ type: 'REFRESH' })
@@ -79,6 +80,14 @@ export default function SettingsModal() {
               className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
               onChange={e => setName(e.target.value)}
             />
+          </div>
+
+          <div className="mt-3">
+            <label for="fill-white" class="flex relative items-center mb-4 cursor-pointer">
+              <input type="checkbox" id="fill-white" class="sr-only" checked={isFillWhite} onChange={() => setIsFillWhite(!isFillWhite)} />
+              <div class="w-11 h-6 rounded-full border toggle-bg bg-gray-700 border-gray-600"></div>
+              <span class="ml-3 text-sm font-medium text-gray-300">Fill white icons on preview</span>
+            </label>
           </div>
 
           <div className="mt-3">

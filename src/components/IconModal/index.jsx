@@ -8,6 +8,7 @@ import { useState, useContext, useEffect } from 'react'
 
 export default function IconModal() {
   const [name, setName] = useState('')
+  const [iconSvg, setIconSvg] = useState('')
   const [regexps, setRegexps] = useState([])
   const [app, dispatch] = useContext(AppContext)
   const [isSaving, setIsSaving] = useState(false)
@@ -19,6 +20,7 @@ export default function IconModal() {
     if (app.iconModal?.id) {
       setName(app.iconModal.name)
       setRegexps(app.iconModal.regexps || [])
+      setIconSvg((app.isFillWhite) ? app.iconModal.svg.replace(/fill=".*"/g, 'fill="white"') : app.iconModal.svg)
       showModal()
     }
   }, [app.iconModal])
@@ -114,7 +116,7 @@ export default function IconModal() {
           <div className="p-6">
             <div className="py-3 flex items-center justify-center icon-preview-container bg-gray-800 rounded">
               <svg className="h-32 w-32" viewBox="0 0 24 24">
-                {ReactHtmlParser(app.iconModal?.svg)}
+                {ReactHtmlParser(iconSvg)}
               </svg>
             </div>
 

@@ -1,6 +1,7 @@
 export default {
   name: 'Icom',
   icons: [],
+  isFillWhite: false,
   regexps: [{
     expression: '\fill=".*"\g',
     value: 'fill="white"'
