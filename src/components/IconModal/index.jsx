@@ -36,7 +36,7 @@ export default function IconModal() {
       setIsSaving(true)
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon'
-      const body = { name, id: app.iconModal?.id }
+      const body = { name, regexps, id: app.iconModal?.id }
 
       axios.patch(endpoint, body)
       
@@ -189,7 +189,7 @@ export default function IconModal() {
                 className="mr-2 flex items-center justify-center text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                 onClick={save}
               >
-                {isSaving && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+                {isSaving && <div className="mr-2"><Spinner size="sm" color="white-blue" /></div>}
                 <span>{isSaving ? 'Loading...' : 'Save'}</span>
               </button>
               <button
@@ -209,7 +209,7 @@ export default function IconModal() {
                 className="flex items-center justify-center text-white focus:ring-40 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-700 focus:ring-red-900"
                 onClick={deleteIcon}
               >
-                {isDeleting && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+                {isDeleting && <div className="mr-2"><Spinner size="sm" color="white-blue" /></div>}
                 <span>{isDeleting ? 'Loading...' : 'Delete'}</span>
               </button>
             </div>

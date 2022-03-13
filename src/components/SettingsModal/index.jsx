@@ -83,10 +83,10 @@ export default function SettingsModal() {
           </div>
 
           <div className="mt-3">
-            <label for="fill-white" class="flex relative items-center mb-4 cursor-pointer">
-              <input type="checkbox" id="fill-white" class="sr-only" checked={isFillWhite} onChange={() => setIsFillWhite(!isFillWhite)} />
-              <div class="w-11 h-6 rounded-full border toggle-bg bg-gray-700 border-gray-600"></div>
-              <span class="ml-3 text-sm font-medium text-gray-300">Fill white icons on preview</span>
+            <label htmlFor="fill-white" className="flex relative items-center mb-4 cursor-pointer">
+              <input type="checkbox" id="fill-white" className="sr-only" checked={isFillWhite} onChange={() => setIsFillWhite(!isFillWhite)} />
+              <div className="w-11 h-6 rounded-full border toggle-bg bg-gray-700 border-gray-600"></div>
+              <span className="ml-3 text-sm font-medium text-gray-300">Fill white icons on preview</span>
             </label>
           </div>
 
@@ -163,7 +163,7 @@ export default function SettingsModal() {
             <textarea
               id="template"
               value={template}
-              className="block p-2.5 w-full text-sm rounded-lg border focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+              className="min-h-[10rem] block p-2.5 w-full text-sm rounded-lg border focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
               onChange={e => setTemplate(e.target.value)}
             ></textarea>
           </div>
@@ -175,7 +175,7 @@ export default function SettingsModal() {
             className="flex items-center justify-center text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
             onClick={save}
           >
-            {isLoading && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+            {isLoading && <div className="mr-2"><Spinner size="sm" color="white-blue" /></div>}
             <span>{isLoading ? 'Loading...' : 'Save'}</span>
           </button>
           <button

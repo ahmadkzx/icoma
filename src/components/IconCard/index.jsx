@@ -14,7 +14,7 @@ export default function IconCard({ icon }) {
       className="flex items-center justify-center min-h-[4.5rem] cursor-pointer p-5 max-w-sm bg-white rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:bg-gray-700"
       onClick={() => dispatch({ type: 'OPEN_ICON_MODAL', payload: icon })}
     >
-      <svg width="24" height="24" viewbox="0 0 24 24">
+      <svg width="24" height="24" viewBox="0 0 24 24">
         {ReactHtmlParser(iconSvg)}
       </svg>
     </div>

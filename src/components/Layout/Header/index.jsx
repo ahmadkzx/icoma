@@ -11,7 +11,26 @@ export default function Header() {
   const [showSettingsModal] = useModal('settings-modal')
 
   async function generateIcons() {
+   try {
+    dispatch({ type: 'SET_LOADING', payload: true })
+
     axios.post(process.env.REACT_APP_SERVER_ORIGIN + '/api/generator')
+
+    dispatch({
+      type: 'SHOW_TOAST',
+      payload: {
+        type: 'SUCCESS',
+        text: 'Icons generated !',
+        stamp: new Date().getTime()
+      }
+    })
+
+   } catch(err) {
+    console.error(err)
+
+   } finally {
+    dispatch({ type: 'SET_LOADING', payload: false })
+   }
   }
 
   return (
@@ -55,8 +74,7 @@ export default function Header() {
 
       <div className="h-16"></div>
 
-      <AddIconModal />
-      <SettingsModal />
+      {!app.isLoading && <><AddIconModal /> <SettingsModal /></>}
     </div>
   )
 }

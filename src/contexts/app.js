@@ -1,7 +1,14 @@
 import axios from 'axios'
 import { createContext, useReducer, useEffect } from 'react'
 
-const AppReducer = (state = {}, action) => {
+const INITIAL_STATE = {
+  toast: null,
+  stamp: null,
+  iconModal: null,
+  isLoading: true,
+}
+
+const AppReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'INIT':
       return Object.assign({}, state, action.payload)
@@ -20,7 +27,7 @@ const AppReducer = (state = {}, action) => {
   }
 }
 
-export const AppContext = createContext({})
+export const AppContext = createContext()
 
 export function AppContextProvider({ children }) {
   const [app, dispatch] = useReducer(AppReducer)

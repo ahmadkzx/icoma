@@ -138,7 +138,7 @@ export default function AddIconModal() {
               className="flex items-center justify-center text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
               onClick={addIcon}
             >
-              {isLoading && <div className="mr-2"><Spinner size="4" border="white" fill="blue-700" /></div>}
+              {isLoading && <div className="mr-2"><Spinner size="sm" color="white-blue" /></div>}
               <span>{isLoading ? 'Loading...' : 'Add'}</span>
             </button>
             <button
