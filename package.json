@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:api": "nodemon --exec babel-node src/api/index.js",
+    "start": "babel-node dist/server.icom.js",
+    "build": "rimraf dist && webpack --mode production",
+    "dev:api": "nodemon --exec babel-node src/server.js",
     "dev:ui": "webpack-dev-server --mode development --open --hot"
   },
   "eslintConfig": {
