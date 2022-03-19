@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open --hot"
+    "dev": "npm run dev:api && npm run dev:api",
+    "dev:api": "nodemon --exec babel-node src/api/index.js",
+    "dev:ui": "webpack-dev-server --mode development --open --hot"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +42,7 @@
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.7",
+    "@babel/node": "^7.16.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
@@ -48,6 +51,7 @@
     "buffer": "^6.0.3",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^2.0.15",
     "postcss": "^8.4.7",
     "sass": "^1.49.7",
     "sass-loader": "^12.6.0",
