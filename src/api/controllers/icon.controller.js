@@ -6,7 +6,7 @@ import readConfig from '../utils/read-config'
 export async function addIcon(req, res) {
   try {
     const config = await readConfig()
-    const configPath = path.join(__dirname, '../../../mock/config.json')
+    const configPath = path.join(__dirname, 'config.json')
 
     config.icons.push({
       id: uuid(),
@@ -28,7 +28,7 @@ export async function addIcon(req, res) {
 export async function deleteIcon(req, res) {
   try {
     const config = await readConfig()
-    const configPath = path.join(__dirname, '../../../mock/config.json')
+    const configPath = path.join(__dirname, 'config.json')
 
     config.icons = config.icons.filter(icon => icon.id !== req.query.id)
 
@@ -45,7 +45,7 @@ export async function deleteIcon(req, res) {
 export async function updateIcon(req, res) {
   try {
     const config = await readConfig()
-    const configPath = path.join(__dirname, '../../../mock/config.json')
+    const configPath = path.join(__dirname, 'config.json')
 
     const targetIconIndex = config.icons.findIndex(icon => icon.id == req.body.id)
 

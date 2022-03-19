@@ -5,7 +5,7 @@ import defaultConfig from './default-config'
 
 export default async function readConfig() {
   try {
-    const configPath = path.join(__dirname, '../../../mock/config.json')
+    const configPath = path.join(__dirname, 'config.json')
 
     await exist(configPath, /*createIfNotExist*/ true, /*content*/ JSON.stringify(defaultConfig))
 
