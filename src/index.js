@@ -1,7 +1,7 @@
 import 'flowbite'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './assets/styles/app.scss'
+import './assets/styles/index.css'
 import { AppContext } from './contexts/app'
 import IconList from './components/IconList'
 import DefaultLayout from './layouts/default'

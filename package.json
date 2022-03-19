@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run dev:api && npm run dev:api",
     "dev:api": "nodemon --exec babel-node src/api/index.js",
     "dev:ui": "webpack-dev-server --mode development --open --hot"
   },
@@ -53,8 +52,7 @@
     "html-webpack-plugin": "^5.5.0",
     "nodemon": "^2.0.15",
     "postcss": "^8.4.7",
-    "sass": "^1.49.7",
-    "sass-loader": "^12.6.0",
+    "postcss-loader": "^6.2.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
