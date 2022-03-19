@@ -1,0 +1,9 @@
+src
+.env
+.babelrc
+.gitignore
+nodemon.json
+node_modules
+webpack.config.js
+tailwind.config.js
+postcss.config.js

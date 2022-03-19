@@ -1,33 +1,18 @@
 {
   "name": "icom",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "bin": "bin/icom.js",
   "scripts": {
     "start": "babel-node dist/server.icom.js",
     "build": "rimraf dist && webpack --mode production",
     "dev:api": "nodemon --exec babel-node src/server.js",
     "dev:ui": "webpack-dev-server --mode development --open --hot"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "preferGlobal": true,
   "dependencies": {
     "axios": "^0.26.0",
+    "commander": "^9.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
