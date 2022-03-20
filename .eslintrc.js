@@ -4,19 +4,19 @@ module.exports = {
     node: true,
     es6: true
   },
-  extends: ["eslint:recommended", "prettier"],
-  plugins: ["react", "import", "prettier"],
+  extends: ['eslint:recommended', 'prettier'],
+  plugins: ['react', 'import', 'prettier'],
   rules: {
-    "no-unused-vars": "off",
-    "prettier/prettier": ["error"],
+    'no-unused-vars': 'off',
+    'prettier/prettier': ['error']
   },
-  parser: "@babel/eslint-parser",
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
-      modules: true,
+      modules: true
     },
     ecmaVersion: 9,
-    sourceType: "module",
-  },
+    sourceType: 'module'
+  }
 }
