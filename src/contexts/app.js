@@ -5,11 +5,11 @@ const INITIAL_STATE = {
   toast: null,
   stamp: null,
   iconModal: null,
-  isLoading: true,
+  isLoading: true
 }
 
 const AppReducer = (state = INITIAL_STATE, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'INIT':
       return Object.assign({}, state, action.payload)
     case 'SHOW_TOAST':
@@ -40,20 +40,14 @@ export function AppContextProvider({ children }) {
 
       const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api'
       const { data: result } = await axios.get(endpoint)
-      
-      dispatch({ type: 'INIT', payload: result.data })
 
-    } catch(err) {
+      dispatch({ type: 'INIT', payload: result.data })
+    } catch (err) {
       console.error(err)
-      
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false })
     }
   }
 
-  return (
-    <AppContext.Provider value={[ app, dispatch ]}>
-      {children}
-    </AppContext.Provider>
-  )
+  return <AppContext.Provider value={[app, dispatch]}>{children}</AppContext.Provider>
 }

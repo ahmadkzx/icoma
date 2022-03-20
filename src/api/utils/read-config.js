@@ -4,17 +4,12 @@ import fs from 'fs/promises'
 import defaultConfig from './default-config'
 
 export default async function readConfig() {
-  try {
-    const configPath = path.join(__dirname, 'config.json')
+  const configPath = path.join(__dirname, 'config.json')
 
-    await exist(configPath, /*createIfNotExist*/ true, /*content*/ JSON.stringify(defaultConfig))
+  await exist(configPath, /*createIfNotExist*/ true, /*content*/ JSON.stringify(defaultConfig))
 
-    const configJson = await fs.readFile(configPath, { encoding: 'utf-8' })
-    const config = JSON.parse(configJson)
+  const configJson = await fs.readFile(configPath, { encoding: 'utf-8' })
+  const config = JSON.parse(configJson)
 
-    return config
-
-  } catch(err) {
-    throw err
-  }
+  return config
 }

@@ -12,11 +12,11 @@ function Main() {
 
   return (
     <div>
-      {app && <DefaultLayout>
-        <div className="container mx-auto mt-3">
-          {app.icons && <IconList icons={app.icons} />}
-        </div>
-      </DefaultLayout>}
+      {app && (
+        <DefaultLayout>
+          <div className="container mx-auto mt-3">{app.icons && <IconList icons={app.icons} />}</div>
+        </DefaultLayout>
+      )}
     </div>
   )
 }
@@ -30,6 +30,5 @@ function App() {
     </React.StrictMode>
   )
 }
-
 
 ReactDOM.render(<App />, document.getElementById('root'))

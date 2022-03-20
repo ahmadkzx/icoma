@@ -13,12 +13,12 @@ export default function useModal(id) {
     backdrop.setAttribute('modal-backdrop', true)
     document.body.appendChild(backdrop)
   }
-  
+
   function show() {
     __getElements()
     modalEl.classList.add('flex')
     modalEl.classList.remove('hidden')
-    
+
     if (modalBackdropEl) {
       modalBackdropEl.classList.remove('hidden')
     } else {

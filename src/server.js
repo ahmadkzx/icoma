@@ -1,8 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 import routes from './api/routes'
-
-(async function startIcom() {
+;(async function startIcom() {
   try {
     const app = express()
     app.use(cors())
@@ -12,8 +11,7 @@ import routes from './api/routes'
     await app.listen(5000)
 
     console.log('Icom started...')
-
-  } catch(err) {
+  } catch (err) {
     console.error(err)
   }
 })()

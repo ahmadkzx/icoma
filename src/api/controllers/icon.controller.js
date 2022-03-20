@@ -18,8 +18,7 @@ export async function addIcon(req, res) {
     await fs.writeFile(configPath, JSON.stringify(config), { encoding: 'utf-8' })
 
     res.sendStatus(200)
-
-  } catch(err) {
+  } catch (err) {
     console.error('[SERVER ERROR]: ', err)
     res.sendStatus(500)
   }
@@ -30,13 +29,12 @@ export async function deleteIcon(req, res) {
     const config = await readConfig()
     const configPath = path.join(__dirname, 'config.json')
 
-    config.icons = config.icons.filter(icon => icon.id !== req.query.id)
+    config.icons = config.icons.filter((icon) => icon.id !== req.query.id)
 
     await fs.writeFile(configPath, JSON.stringify(config), { encoding: 'utf-8' })
 
     res.sendStatus(200)
-
-  } catch(err) {
+  } catch (err) {
     console.error('[SERVER ERROR]: ', err)
     res.sendStatus(500)
   }
@@ -47,7 +45,7 @@ export async function updateIcon(req, res) {
     const config = await readConfig()
     const configPath = path.join(__dirname, 'config.json')
 
-    const targetIconIndex = config.icons.findIndex(icon => icon.id == req.body.id)
+    const targetIconIndex = config.icons.findIndex((icon) => icon.id == req.body.id)
 
     if (targetIconIndex == -1) return res.sendStatus(404)
 
@@ -57,8 +55,7 @@ export async function updateIcon(req, res) {
     await fs.writeFile(configPath, JSON.stringify(config), { encoding: 'utf-8' })
 
     res.sendStatus(200)
-
-  } catch(err) {
+  } catch (err) {
     console.error('[SERVER ERROR]: ', err)
     res.sendStatus(500)
   }

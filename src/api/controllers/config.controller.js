@@ -7,8 +7,7 @@ export async function getConfig(req, res) {
     const config = await readConfig()
 
     res.status(200).json({ data: config })
-
-  } catch(err) {
+  } catch (err) {
     console.error('[SERVER ERROR]: ', err)
     res.sendStatus(500)
   }
@@ -27,8 +26,7 @@ export async function setConfig(req, res) {
 
     fs.writeFile(configPath, JSON.stringify(config), 'utf-8')
     res.sendStatus(200)
-
-  } catch(err) {
+  } catch (err) {
     console.error('[SERVER ERROR]: ', err)
     res.sendStatus(500)
   }

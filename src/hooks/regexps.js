@@ -4,11 +4,11 @@ export default function useRegexps() {
   }
 
   function deleteRegexp(regexps, targetRegexpId) {
-    return regexps.filter(regexp => regexp.id != targetRegexpId)
+    return regexps.filter((regexp) => regexp.id != targetRegexpId)
   }
 
   function updateRegexp(regexps, targetRegexp) {
-    return regexps.map(regexp => {
+    return regexps.map((regexp) => {
       if (regexp.id == targetRegexp.id) regexp = targetRegexp
       return regexp
     })
