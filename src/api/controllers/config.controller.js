@@ -19,8 +19,8 @@ export async function setConfig(req, res) {
     const configPath = path.join(__dirname, process.env.CONFIG_PATH)
 
     if (req.body.name) config.name = req.body.name
-    if (req.body.target) config.target = req.body.target
     if (req.body.regexps) config.regexps = req.body.regexps
+    if (req.body.fileType) config.fileType = req.body.fileType
     if (req.body.template) config.template = req.body.template
     if (req.body.isFillWhite) config.isFillWhite = req.body.isFillWhite
     if (req.body.destination) config.destination = req.body.destination

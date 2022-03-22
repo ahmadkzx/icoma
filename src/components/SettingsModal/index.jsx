@@ -8,9 +8,9 @@ import { AppContext } from '../../contexts/app'
 export default function SettingsModal() {
   const [app, dispatch] = useContext(AppContext)
   const [name, setName] = useState(app.name)
-  const [target, setTarget] = useState(app.target)
   const [isLoading, setIsLoading] = useState(false)
   const [regexps, setRegexps] = useState(app.regexps)
+  const [fileType, setFileType] = useState(app.fileType)
   const [template, setTemplate] = useState(app.template)
   const [showModal, hideModal] = useModal('settings-modal')
   const [addRegexp, deleteRegexp, updateRegexp] = useRegexps()
@@ -23,7 +23,7 @@ export default function SettingsModal() {
       setIsLoading(true)
 
       const endpoint = process.env.API_ORIGIN + '/api'
-      const body = { name, target, regexps, template, isFillWhite, destination }
+      const body = { name, fileType, regexps, template, isFillWhite, destination }
 
       await axios.patch(endpoint, body)
       dispatch({ type: 'REFRESH' })
@@ -91,45 +91,29 @@ export default function SettingsModal() {
             </label>
           </div>
 
-          <div>
-            <label htmlFor="destination" className="block mb-2 text-sm font-medium text-gray-900 text-gray-300">Icons Destination Path</label>
-            <input
-              type="text"
-              id="destination"
-              value={destination}
-              placeholder="/src/components/icons"
-              className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-              onChange={e => setDestination(e.target.value)}
-            />
-          </div>
-
-          <div className="mt-3">
-            <span className="block mb-2 text-sm font-medium text-gray-900 text-gray-300">Target</span>
-
-            <div className="flex items-center mb-2">
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <div>
+              <label htmlFor="destination" className="block mb-2 text-sm font-medium text-gray-900 text-gray-300">Icons Destination Path</label>
               <input
-                value="vue"
-                type="radio"
-                name="target"
-                id="target-vue"
-                checked={target == 'vue'}
-                onChange={e => setTarget(e.target.value)}
-                className="w-4 h-4 focus:ring-2 focus:ring-blue-600 focus:bg-blue-600 bg-gray-700 border-gray-600"
+                type="text"
+                id="destination"
+                value={destination}
+                placeholder="/src/components/icons"
+                className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                onChange={e => setDestination(e.target.value)}
               />
-              <label htmlFor="target-vue" className="block ml-2 text-sm font-medium text-gray-300">Vue</label>
             </div>
 
-            <div className="flex items-center">
+            <div>
+              <label htmlFor="file-type" className="block mb-2 text-sm font-medium text-gray-900 text-gray-300">Icons File Type</label>
               <input
-                type="radio"
-                value="react"
-                name="target"
-                id="target-react"
-                checked={target == 'react'}
-                onChange={e => setTarget(e.target.value)}
-                className="w-4 h-4 focus:ring-2 focus:ring-blue-600 focus:bg-blue-600 bg-gray-700 border-gray-600"
+                type="text"
+                id="file-type"
+                value={fileType}
+                placeholder="vue"
+                className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                onChange={e => setFileType(e.target.value)}
               />
-              <label htmlFor="target-react" className="block ml-2 text-sm font-medium text-gray-300">React</label>
             </div>
           </div>
 
