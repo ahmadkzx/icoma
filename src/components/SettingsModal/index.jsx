@@ -14,6 +14,7 @@ export default function SettingsModal() {
   const [template, setTemplate] = useState(app.template)
   const [showModal, hideModal] = useModal('settings-modal')
   const [addRegexp, deleteRegexp, updateRegexp] = useRegexps()
+  const [destination, setDestination] = useState(app.destination)
   const [isFillWhite, setIsFillWhite] = useState(app.isFillWhite)
 
   async function save() {
@@ -22,7 +23,7 @@ export default function SettingsModal() {
       setIsLoading(true)
 
       const endpoint = process.env.API_ORIGIN + '/api'
-      const body = { name, target, regexps, template, isFillWhite }
+      const body = { name, target, regexps, template, isFillWhite, destination }
 
       await axios.patch(endpoint, body)
       dispatch({ type: 'REFRESH' })
@@ -88,6 +89,18 @@ export default function SettingsModal() {
               <div className="w-11 h-6 rounded-full border toggle-bg bg-gray-700 border-gray-600"></div>
               <span className="ml-3 text-sm font-medium text-gray-300">Fill white icons on preview</span>
             </label>
+          </div>
+
+          <div>
+            <label htmlFor="destination" className="block mb-2 text-sm font-medium text-gray-900 text-gray-300">Icons Destination Path</label>
+            <input
+              type="text"
+              id="destination"
+              value={destination}
+              placeholder="/src/components/icons"
+              className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+              onChange={e => setDestination(e.target.value)}
+            />
           </div>
 
           <div className="mt-3">

@@ -23,6 +23,7 @@ export async function setConfig(req, res) {
     if (req.body.regexps) config.regexps = req.body.regexps
     if (req.body.template) config.template = req.body.template
     if (req.body.isFillWhite) config.isFillWhite = req.body.isFillWhite
+    if (req.body.destination) config.destination = req.body.destination
 
     fs.writeFile(configPath, JSON.stringify(config), 'utf-8')
     res.sendStatus(200)

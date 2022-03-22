@@ -6,7 +6,7 @@ import applyRegexps from '../utils/apply-regexps'
 export async function generate(req, res) {
   try {
     const config = await readConfig()
-    const dist = path.join(__dirname, '../../../mock/icon')
+    const dist = path.join(__dirname, (process.env.NODE_ENV == 'development') ? '../../../mock/icons' : config.destination)
 
     await Promise.all(
       config.icons.map(async (icon) => {
