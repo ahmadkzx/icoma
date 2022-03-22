@@ -35,7 +35,7 @@ export default function IconModal() {
       if (isSaving) return
       setIsSaving(true)
 
-      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon'
+      const endpoint = process.env.API_ORIGIN + '/api/icon'
       const body = { name, regexps, id: app.iconModal?.id }
 
       axios.patch(endpoint, body)
@@ -57,7 +57,7 @@ export default function IconModal() {
       if (isDeleting) return
       setIsDeleting(true)
 
-      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon?id=' + app.iconModal?.id
+      const endpoint = process.env.API_ORIGIN + '/api/icon?id=' + app.iconModal?.id
 
       axios.delete(endpoint)
       

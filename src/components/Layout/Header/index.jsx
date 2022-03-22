@@ -14,7 +14,7 @@ export default function Header() {
    try {
     dispatch({ type: 'SET_LOADING', payload: true })
 
-    axios.post(process.env.REACT_APP_SERVER_ORIGIN + '/api/generator')
+    axios.post(process.env.API_ORIGIN + '/api/generator')
 
     dispatch({
       type: 'SHOW_TOAST',

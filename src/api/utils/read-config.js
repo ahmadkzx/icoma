@@ -4,7 +4,7 @@ import fs from 'fs/promises'
 import defaultConfig from './default-config'
 
 export default async function readConfig() {
-  const configPath = path.join(__dirname, 'config.json')
+  const configPath = path.join(__dirname, process.env.CONFIG_PATH)
 
   await exist(configPath, /*createIfNotExist*/ true, /*content*/ JSON.stringify(defaultConfig))
 

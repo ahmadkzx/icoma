@@ -21,7 +21,7 @@ export default function SettingsModal() {
       if (isLoading) return
       setIsLoading(true)
 
-      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api'
+      const endpoint = process.env.API_ORIGIN + '/api'
       const body = { name, target, regexps, template, isFillWhite }
 
       await axios.patch(endpoint, body)

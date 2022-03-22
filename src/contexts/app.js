@@ -38,7 +38,7 @@ export function AppContextProvider({ children }) {
     try {
       dispatch({ type: 'SET_LOADING', payload: true })
 
-      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api'
+      const endpoint = process.env.API_ORIGIN + '/api'
       const { data: result } = await axios.get(endpoint)
 
       dispatch({ type: 'INIT', payload: result.data })

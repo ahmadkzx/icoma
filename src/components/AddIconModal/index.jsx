@@ -19,7 +19,7 @@ export default function AddIconModal() {
       __validateFields()
       const svgText = await __extractSvg()
 
-      const endpoint = process.env.REACT_APP_SERVER_ORIGIN + '/api/icon'
+      const endpoint = process.env.API_ORIGIN + '/api/icon'
       const body = {
         name: iconName,
         svg: svgText,

@@ -16,7 +16,7 @@ export async function getConfig(req, res) {
 export async function setConfig(req, res) {
   try {
     const config = await readConfig()
-    const configPath = path.join(__dirname, 'config.json')
+    const configPath = path.join(__dirname, process.env.CONFIG_PATH)
 
     if (req.body.name) config.name = req.body.name
     if (req.body.target) config.target = req.body.target

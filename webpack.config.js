@@ -1,5 +1,4 @@
 const path = require('path')
-const dotenv = require('dotenv')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -41,7 +40,9 @@ module.exports = (env, argv) => {
       }),
 
       new webpack.DefinePlugin({
-        'process.env': JSON.stringify(dotenv.config({ path: './.env' }).parsed)
+        'process.env': JSON.stringify({
+          API_ORIGIN: 'http://localhost:5000'
+        })
       })
     ]
   }
@@ -68,7 +69,16 @@ module.exports = (env, argv) => {
           use: ['babel-loader']
         }
       ]
-    }
+    },
+
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify({
+          NODE_ENV: 'production',
+          CONFIG_PATH: './config.json'
+        })
+      })
+    ]
   }
 
   return argv.mode == 'development' ? UI_CONFIG : [SERVER_CONFIG, UI_CONFIG]
