@@ -75,7 +75,7 @@ module.exports = (env, argv) => {
       new webpack.DefinePlugin({
         'process.env': JSON.stringify({
           NODE_ENV: 'production',
-          CONFIG_PATH: './config.json'
+          CONFIG_PATH: '../icom.json'
         })
       })
     ]
