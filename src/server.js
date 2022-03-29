@@ -10,7 +10,6 @@ import routes from './api/routes'
     if (process.env.NODE_ENV == 'production') app.use('/app', express.static(__dirname))
     await app.listen(5000)
 
-    console.log('Icom started...')
   } catch (err) {
     console.error(err)
   }

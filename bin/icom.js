@@ -29,7 +29,7 @@ const APP_DEST = path.join(__dirname, "../../../.icom");
 		.description("initialize icom")
     .action(async () => {
       exec("node .icom/server.icom.js");
-      console.log("✅ Icom started on localhost:5000/app");
+      console.log("✅ Icom started on http://localhost:5000/app");
     });
 
 	program.parse(process.argv);
