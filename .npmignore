@@ -1,7 +1,12 @@
 src
 .env
+mock
+.vscdoe
 .babelrc
+.eslintrc
 .gitignore
+.prettierrc
+yarn.lock
 nodemon.json
 node_modules
 webpack.config.js
