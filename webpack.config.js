@@ -78,7 +78,11 @@ module.exports = (env, argv) => {
           CONFIG_PATH: '../icom.json'
         })
       })
-    ]
+    ],
+
+    optimization:{
+      minimize: false // <---- disables uglify.
+    }
   }
 
   return argv.mode == 'development' ? UI_CONFIG : [SERVER_CONFIG, UI_CONFIG]
