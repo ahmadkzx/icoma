@@ -24,7 +24,7 @@ export default function DefaultLayout({ children }) {
   }, [app.isLoading])
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen">
       <Header />
       {children}
       {app?.toast && <Toast text={app.toast.text} type={app.toast.type} />}
