@@ -8,7 +8,7 @@ module.exports = (env, argv) => {
 
     output: {
       path: path.join(__dirname, 'dist'),
-      filename: 'ui.icom.js'
+      filename: 'ui.icoma.js'
     },
 
     devServer: {
@@ -52,7 +52,7 @@ module.exports = (env, argv) => {
 
     output: {
       path: path.join(__dirname, 'dist'),
-      filename: 'server.icom.js'
+      filename: 'server.icoma.js'
     },
 
     resolve: {
@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
     plugins: [
       new webpack.EnvironmentPlugin({
         NODE_ENV: 'production',
-        CONFIG_PATH: '../icom.json'
+        CONFIG_PATH: '../icoma.json'
       })
     ]
   }

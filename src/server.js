@@ -1,7 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 import routes from './api/routes'
-;(async function startIcom() {
+;(async function startIcoma() {
   try {
     const app = express()
     app.use(cors())

@@ -4,15 +4,15 @@ const fs = require("fs").promises;
 const { Command } = require("commander");
 const { exec } = require("child_process");
 
-const APP_SRC = path.join(__dirname, "../icom/dist");
-const APP_DEST = path.join(__dirname, "../../.icom");
+const APP_SRC = path.join(__dirname, "../icoma/dist");
+const APP_DEST = path.join(__dirname, "../../.icoma");
 
 (function iniCLI() {
   const program = new Command()
 
 	program
 		.command("init")
-		.description("initialize icom")
+		.description("initialize icoma")
     .action(async () => {
       await fs.mkdir(APP_DEST, { recursive: true });
       const entries = await fs.readdir(APP_SRC, { withFileTypes: true });
@@ -26,10 +26,10 @@ const APP_DEST = path.join(__dirname, "../../.icom");
 
   program
 		.command("start")
-		.description("initialize icom")
+		.description("initialize icoma")
     .action(async () => {
-      exec("node .icom/server.icom.js");
-      console.log("✅ Icom started on http://localhost:5000/app");
+      exec("node .icoma/server.icoma.js");
+      console.log("✅ Icoma started on http://localhost:5000/app");
     });
 
 	program.parse(process.argv);

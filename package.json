@@ -1,11 +1,11 @@
 {
-  "name": "icom",
+  "name": "icoma",
   "version": "0.1.0",
   "private": false,
-  "bin": "bin/icom.js",
+  "bin": "bin/icoma.js",
   "scripts": {
     "lint": "eslint --ext .js src --fix",
-    "start": "babel-node dist/server.icom.js",
+    "start": "babel-node dist/server.icoma.js",
     "build": "rimraf dist && webpack --mode production",
     "dev:api": "nodemon --exec babel-node src/server.js",
     "dev:ui": "webpack-dev-server --mode development --open --hot"
