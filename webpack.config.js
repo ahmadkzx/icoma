@@ -39,10 +39,8 @@ module.exports = (env, argv) => {
         template: path.join(__dirname, 'src', 'index.html')
       }),
 
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify({
-          API_ORIGIN: 'http://localhost:5000'
-        })
+      new webpack.EnvironmentPlugin({
+        API_ORIGIN: 'http://localhost:5000'
       })
     ]
   }
@@ -72,17 +70,11 @@ module.exports = (env, argv) => {
     },
 
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify({
-          NODE_ENV: 'production',
-          CONFIG_PATH: '../icom.json'
-        })
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: 'production',
+        CONFIG_PATH: '../icom.json'
       })
-    ],
-
-    optimization:{
-      minimize: false // <---- disables uglify.
-    }
+    ]
   }
 
   return argv.mode == 'development' ? UI_CONFIG : [SERVER_CONFIG, UI_CONFIG]
