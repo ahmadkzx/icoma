@@ -1,4 +1,4 @@
-# Icoma
+# Icoma (Beta)
 Icoma is UI environment for generate and manage **icon components**.
 With it you can generate icon components from the template and use them in your project.  
 
