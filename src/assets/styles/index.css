@@ -15,7 +15,7 @@ html::before {
   height:50rem;
   background: url("../images/bg.avif") center no-repeat;
   background-size: cover;
-  opacity: .1;
+  opacity: .2;
 }
 
 body {
