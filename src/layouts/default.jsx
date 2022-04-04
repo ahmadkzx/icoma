@@ -3,7 +3,6 @@ import Toast from '../components/Toast'
 import { AppContext } from '../contexts/app'
 import { useContext, useEffect } from 'react'
 import Header from '../components/Layout/Header'
-import Footer from '../components/Layout/Footer'
 import LoadingModal from '../components/LoadingModal'
 
 export default function DefaultLayout({ children }) {
@@ -28,7 +27,6 @@ export default function DefaultLayout({ children }) {
       <Header />
       {children}
       {app?.toast && <Toast text={app.toast.text} type={app.toast.type} />}
-      <Footer />
       <LoadingModal />
     </div>
   )

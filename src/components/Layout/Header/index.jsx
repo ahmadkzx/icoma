@@ -47,7 +47,9 @@ export default function Header() {
         <div className="container mx-auto py-3">
           <div className="flex items-center justify-between">
             <div className="w-64">
-              <h1 className="text-white text-3xl font-mono">Icoma</h1>
+              <a href="https://github.com/ahmadkzx/icoma" target="_blank">
+                <h1 className="text-white text-3xl font-mono">Icoma</h1>
+              </a>
             </div>
 
             <div className="inline-flex rounded-md shadow-sm" role="group">
