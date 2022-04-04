@@ -3,10 +3,10 @@ src
 mock
 .vscdoe
 .babelrc
-.eslintrc
 .gitignore
 .prettierrc
 yarn.lock
+.eslintrc.js
 nodemon.json
 node_modules
 webpack.config.js
