@@ -1,7 +1,7 @@
 src
 .env
 mock
-.vscdoe
+.vscode
 .babelrc
 .gitignore
 .prettierrc
