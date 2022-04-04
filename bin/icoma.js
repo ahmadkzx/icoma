@@ -4,8 +4,8 @@ const fs = require("fs").promises;
 const { Command } = require("commander");
 const { exec } = require("child_process");
 
-const APP_SRC = path.join(__dirname, "../icoma/dist");
-const APP_DEST = path.join(__dirname, "../../.icoma");
+const APP_SRC = path.join(__dirname, "../dist");
+const APP_DEST = path.join(__dirname, "../../../.icoma");
 
 (function iniCLI() {
   const program = new Command()
