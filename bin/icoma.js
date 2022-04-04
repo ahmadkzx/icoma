@@ -26,7 +26,7 @@ const APP_DEST = path.join(__dirname, "../../.icoma");
 
   program
 		.command("start")
-		.description("initialize icoma")
+		.description("Start icoma")
     .action(async () => {
       exec("node .icoma/server.icoma.js");
       console.log("✅ Icoma started on http://localhost:5000/app");
