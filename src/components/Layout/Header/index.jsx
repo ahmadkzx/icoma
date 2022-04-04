@@ -48,7 +48,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <div className="w-64">
               <a href="https://github.com/ahmadkzx/icoma" target="_blank">
-                <h1 className="text-white text-3xl font-mono">Icoma</h1>
+                <h1 className="text-white text-3xl font-mono">Icoma<span className="text-sm text-slate-400 ml-1">(Beta)</span></h1>
               </a>
             </div>
 
