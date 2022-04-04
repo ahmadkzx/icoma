@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   toast: null,
   stamp: null,
   iconModal: null,
-  isLoading: true
+  isLoading: true,
+  searchQuery: ''
 }
 
 const AppReducer = (state = INITIAL_STATE, action) => {
@@ -22,6 +23,8 @@ const AppReducer = (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, { isLoading: action.payload })
     case 'OPEN_ICON_MODAL':
       return Object.assign({}, state, { iconModal: action.payload })
+    case 'SET_SEARCH_QUERY':
+      return Object.assign({}, state, { searchQuery: action.payload })
     default:
       return state
   }

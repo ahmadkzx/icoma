@@ -14,7 +14,7 @@ function Main() {
     <div>
       {app && (
         <DefaultLayout>
-          <div className="container mx-auto mt-3">{app.icons && <IconList icons={app.icons} />}</div>
+          <div className="container mx-auto mt-3">{app.icons && <IconList />}</div>
         </DefaultLayout>
       )}
     </div>
