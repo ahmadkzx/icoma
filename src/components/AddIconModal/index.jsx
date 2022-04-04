@@ -25,9 +25,8 @@ export default function AddIconModal() {
         svg: svgText,
       }
 
-      axios.put(endpoint, body)
+      await axios.put(endpoint, body)
       
-      await new Promise(r => setTimeout(r, 1000))
       dispatch({ type: 'REFRESH' })
       hideModal()
 

@@ -38,9 +38,8 @@ export default function IconModal() {
       const endpoint = process.env.API_ORIGIN + '/api/icon'
       const body = { name, regexps, id: app.iconModal?.id }
 
-      axios.patch(endpoint, body)
+      await axios.patch(endpoint, body)
       
-      await new Promise(r => setTimeout(r, 1000))
       setIsSaving(false)
       dispatch({ type: 'REFRESH' })
       dispatch({ type: 'OPEN_ICON_MODAL' })
@@ -48,6 +47,15 @@ export default function IconModal() {
 
     } catch(err) {
       console.error(err)
+      dispatch({
+        type: 'SHOW_TOAST',
+        payload: {
+          type: 'ERROR',
+          text: 'Failed !',
+          stamp: new Date().getTime()
+        }
+      })
+      
       setIsSaving(false)
     }
   }
@@ -59,9 +67,8 @@ export default function IconModal() {
 
       const endpoint = process.env.API_ORIGIN + '/api/icon?id=' + app.iconModal?.id
 
-      axios.delete(endpoint)
+      await axios.delete(endpoint)
       
-      await new Promise(r => setTimeout(r, 1000))
       setIsDeleting(false)
       dispatch({ type: 'REFRESH' })
       dispatch({ type: 'OPEN_ICON_MODAL' })
@@ -69,6 +76,15 @@ export default function IconModal() {
 
     } catch(err) {
       console.error(err)
+      dispatch({
+        type: 'SHOW_TOAST',
+        payload: {
+          type: 'ERROR',
+          text: 'Failed !',
+          stamp: new Date().getTime()
+        }
+      })
+      
       setIsDeleting(false)
     }
   }

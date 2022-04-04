@@ -14,7 +14,7 @@ export default function Header() {
    try {
     dispatch({ type: 'SET_LOADING', payload: true })
 
-    axios.post(process.env.API_ORIGIN + '/api/generator')
+    await axios.post(process.env.API_ORIGIN + '/api/generator')
 
     dispatch({
       type: 'SHOW_TOAST',
@@ -27,6 +27,14 @@ export default function Header() {
 
    } catch(err) {
     console.error(err)
+    dispatch({
+      type: 'SHOW_TOAST',
+      payload: {
+        type: 'ERROR',
+        text: 'Failed !',
+        stamp: new Date().getTime()
+      }
+    })
 
    } finally {
     dispatch({ type: 'SET_LOADING', payload: false })

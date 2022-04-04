@@ -44,6 +44,15 @@ export function AppContextProvider({ children }) {
       dispatch({ type: 'INIT', payload: result.data })
     } catch (err) {
       console.error(err)
+      dispatch({
+        type: 'SHOW_TOAST',
+        payload: {
+          type: 'ERROR',
+          text: 'Failed !',
+          stamp: new Date().getTime()
+        }
+      })
+      
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false })
     }
