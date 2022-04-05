@@ -21,7 +21,7 @@ export default function IconList() {
   }, [app.searchQuery])
 
   return (
-    <div className="grid md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-16 2xl:grid-cols-18 gap-2">
+    <div className="grid md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-16 2xl:grid-cols-18 gap-2 pb-2">
       {!isSearching
         ? icons.all.map(icon => <IconCard icon={icon} key={icon.id} />)
         : icons.searched.map(icon => <IconCard icon={icon} key={icon.id} />)
