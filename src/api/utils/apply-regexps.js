@@ -3,7 +3,7 @@ export default function applyRegexps(config, icon) {
   const regexps = [...config.regexps, ...icon.regexps]
 
   regexps.forEach((regexp) => {
-    iconSvg.replace(new RegExp(regexp.expression), regexp.value)
+    iconSvg.replace(new RegExp(regexp.expression, 'g'), regexp.value)
   })
 
   return iconSvg
