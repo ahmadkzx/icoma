@@ -6,7 +6,7 @@ import applyRegexps from '../utils/apply-regexps'
 export async function generate(req, res) {
   try {
     const config = await readConfig()
-    const dist = path.join(__dirname, (process.env.NODE_ENV == 'development') ? '../../../mock/icons' : config.destination)
+    const dist = path.join(__dirname, (process.env.NODE_ENV == 'development') ? '../../../mock/icons' : `../${config.destination}`)
     await fs.access(dist)
     await fs.rmdir(dist, { recursive: true })
     await fs.mkdir(dist)
