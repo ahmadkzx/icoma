@@ -11,7 +11,7 @@
   },
   "runOnChangeOnly": false,
   "watch": [
-    "src/api/*.js"
+    "src/api/*/*.js"
   ],
   "env": {
     "NODE_ENV": "development",
