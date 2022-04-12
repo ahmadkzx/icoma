@@ -14,7 +14,7 @@ export async function generate(req, res) {
     await Promise.all(
       config.icons.map(async (icon) => {
         const componentSvg = applyRegexps(config, icon)
-        const componentContent = config.template.replace('{ICON.SVG}', componentSvg).replace('{ICON.NAME}', icon.name)
+        const componentContent = config.template.replaceAll('{ICON.SVG}', componentSvg).replaceAll('{ICON.NAME}', icon.name)
         const componentFiletype = config.fileType
         const componentPath = path.join(dist, `/${icon.name}.${componentFiletype}`)
         await fs.writeFile(componentPath, componentContent, 'utf-8')
